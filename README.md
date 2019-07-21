@@ -54,8 +54,8 @@ https://websmallrabbit.github.io
 - 收款二维码   
 我想和咖啡ヾ(≧O≦)〃嗷~
 <center>
-<img src='https://webrabbit.oss-cn-beijing.aliyuncs.com/WechatIMG51.jpeg' width="50%">
-<img src='https://webrabbit.oss-cn-beijing.aliyuncs.com/zhifubao.jpeg' width="50%">
+<img src='https://webrabbit.oss-cn-beijing.aliyuncs.com/WechatIMG51.jpeg' width="30%">
+<img src='https://webrabbit.oss-cn-beijing.aliyuncs.com/zhifubao.jpeg' width="30%">
 </center>
 
 
