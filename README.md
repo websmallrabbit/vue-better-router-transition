@@ -51,9 +51,12 @@ https://github.com/websmallrabbit/vue-better-router-transition/issues
 
 - 个人主页
 https://websmallrabbit.github.io
-- 收款二维码
-![微信](https://webrabbit.oss-cn-beijing.aliyuncs.com/WechatIMG51.jpeg)
-![支付宝](https://webrabbit.oss-cn-beijing.aliyuncs.com/zhifubao.jpeg)
+- 收款二维码   
+我想和咖啡ヾ(≧O≦)〃嗷~
+<center>
+<img src='https://webrabbit.oss-cn-beijing.aliyuncs.com/WechatIMG51.jpeg' width="50%">
+<img src='https://webrabbit.oss-cn-beijing.aliyuncs.com/zhifubao.jpeg' width="50%">
+</center>
 
 
 
