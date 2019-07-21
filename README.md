@@ -25,6 +25,20 @@ vue-仿微信页面左右切换动画效果，页面刷新不影响,滑动切换
        keepAlive: false //不缓存
     }
 4. 在layout/index.vue里面配置
+5. 
+```vue
+ path: '/',
+  component: index,
+  redirect: '/home',
+  children: [{
+    path: '/home',
+    component: r => require(['@/pages/home'], r),
+    meta: {
+      title: 'home1'
+    }
+  }
+  首页path: '/home' 必须是home
+```
 ```vue
   <router-layout id="__index">
         <router-view></router-view>
