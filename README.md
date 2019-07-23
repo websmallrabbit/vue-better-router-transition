@@ -49,6 +49,10 @@ vue-仿微信页面左右切换动画效果，页面刷新不影响,滑动切换
         </van-tabbar>
       </router-layout>
 ```
+5. 在app.vue里 
+<vue-better-router-transition :keepAlive="true"></vue-better-router-transition>
+---
+
 router-layout 为插件自带的全局组件，<van-tabbar> 为vant插件，可以替换其他插件  
 [使用例子](https://github.com/websmallrabbit/vue-better-router-transition/tree/master/src/pages/index.vue)  
 [顶部导航栏使用例子](https://github.com/websmallrabbit/vue-better-router-transition/tree/master/src/pages/address.vue)  
