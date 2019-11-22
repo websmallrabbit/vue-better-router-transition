@@ -75,10 +75,10 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.4.3", "@babel/runtime@^7.5.4":
-  version "7.5.5"
-  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.5.5.tgz?cache=0&sync_timestamp=1563398515522&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
-  integrity sha1-dPulbTXvvspEQJHHhQzNSU/S8TI=
+"@babel/runtime@7.x", "@babel/runtime@^7.0.0":
+  version "7.7.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.2.tgz#111a78002a5c25fc8e3361bedc9529c696b85a6a"
+  integrity sha512-JONRbXbTXc9WQE2mAZd1p0Z3DZ/6vaQIkgYMSTP3KjRCyd7rCZCcfhCyX+YjwcKxcZ82UrxbRD358bpExNgrjw==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -141,17 +141,12 @@
   resolved "https://registry.npm.taobao.org/@types/strip-json-comments/download/@types/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
   integrity sha1-mqMMBNshKpoGSdaub9UKzMQHSKE=
 
-"@vant/icons@1.1.7":
-  version "1.1.7"
-  resolved "https://registry.npm.taobao.org/@vant/icons/download/@vant/icons-1.1.7.tgz#29561adfffa6a750d279dccdbe9a69b743934f3f"
-  integrity sha1-KVYa3/+mp1DSedzNvpppt0OTTz8=
+"@vant/icons@1.1.15":
+  version "1.1.15"
+  resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-1.1.15.tgz#53c51ace21e9992bfeeb2e1ad9094fbf6506d116"
+  integrity sha512-96tbJotfofrKpOrUGWKkiGLJsCFc0OX5pikWLW5yarD+EMhi0zCrQSDb95xGrp/HETAFm+nSTQu2e1zGsWN/7A==
 
-"@vant/icons@1.1.9":
-  version "1.1.9"
-  resolved "https://registry.npm.taobao.org/@vant/icons/download/@vant/icons-1.1.9.tgz#37eafdaff5fcfbb594a27a1470ff3adeb2fa0301"
-  integrity sha1-N+r9r/X8+7WUonoUcP863rL6AwE=
-
-"@vue/babel-helper-vue-jsx-merge-props@^1.0.0", "@vue/babel-helper-vue-jsx-merge-props@^1.0.0-beta.3":
+"@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/@vue/babel-helper-vue-jsx-merge-props/download/@vue/babel-helper-vue-jsx-merge-props-1.0.0.tgz#048fe579958da408fb7a8b2a3ec050b50a661040"
   integrity sha1-BI/leZWNpAj7eosqPsBQtQpmEEA=
@@ -8800,23 +8795,13 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^1.4.8:
-  version "1.6.24"
-  resolved "https://registry.npm.taobao.org/vant/download/vant-1.6.24.tgz?cache=0&sync_timestamp=1563507532759&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvant%2Fdownload%2Fvant-1.6.24.tgz#0fc77930a7f2ea5a64fbe4e23fefd41f99118597"
-  integrity sha1-D8d5MKfy6lpk++TiP+/UH5kRhZc=
+vant@latest:
+  version "2.2.14"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-2.2.14.tgz#882f1d46626bc04b89bc1e1bda7171f24f0d84b7"
+  integrity sha512-IpYs2FsQ8ZY6EcesOD0SBl24mpnzJW/aDVGfjDoGI5fgLQJcYp24twCeLbiX9KdZ0lAgS4PKwKQjkFX/i0yHnQ==
   dependencies:
-    "@babel/runtime" "^7.4.3"
-    "@vant/icons" "1.1.7"
-    "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0-beta.3"
-    vue-lazyload "1.2.3"
-
-vant@^2.0.9:
-  version "2.0.9"
-  resolved "https://registry.npm.taobao.org/vant/download/vant-2.0.9.tgz?cache=0&sync_timestamp=1563507532759&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvant%2Fdownload%2Fvant-2.0.9.tgz#e067f7b86003c634c2b3db13d30d0a26fcdadb2b"
-  integrity sha1-4Gf3uGADxjTCs9sT0w0KJvza2ys=
-  dependencies:
-    "@babel/runtime" "^7.5.4"
-    "@vant/icons" "1.1.9"
+    "@babel/runtime" "7.x"
+    "@vant/icons" "1.1.15"
     "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
     vue-lazyload "1.2.3"
 
@@ -8900,16 +8885,6 @@ vue-loader@^13.3.0:
     vue-hot-reload-api "^2.2.0"
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
-
-vue-better-router-transition@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.npm.taobao.org/vue-better-router-transition/download/vue-better-router-transition-1.1.1.tgz#1b2fd9ca2a89093e3ffae3d4bf57282bca250c8d"
-  integrity sha1-Gy/ZyiqJCT4/+uPUv1coK8olDI0=
-  dependencies:
-    vant "^1.4.8"
-    vue "^2.5.2"
-    vue-better-router-transition "^1.1.0"
-    vue-router "^3.0.1"
 
 vue-router@^3.0.1:
   version "3.0.7"
