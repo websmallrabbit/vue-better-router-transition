@@ -75,17 +75,10 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@babel/runtime@7.x":
+"@babel/runtime@7.x", "@babel/runtime@^7.0.0":
   version "7.7.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.7.tgz#194769ca8d6d7790ec23605af9ee3e42a0aa79cf"
   integrity sha512-uCnC2JEVAu8AKB5do1WRIsvrdJ0flYx/A/9f/6chdacnEZ7LmavjdsDXr5ksYBegxtuTPR5Va9/+13QF/kFkCA==
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
-"@babel/runtime@^7.0.0":
-  version "7.5.5"
-  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.5.5.tgz?cache=0&sync_timestamp=1563398515522&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
-  integrity sha1-dPulbTXvvspEQJHHhQzNSU/S8TI=
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -8808,9 +8801,9 @@ validate-npm-package-license@^3.0.1:
     spdx-expression-parse "^3.0.0"
 
 vant@latest:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-2.3.3.tgz#f01eb215f21055f72c0091dbb585f5aa0da1984f"
-  integrity sha512-F0XSQjOk6D0LhV4+KN3mPeTLBlgW9FNkkhYgCj/0knbTtbqVu2XgBOUdAERPQWZ88VhbdJgaB92dpqrERQtR+w==
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-2.4.1.tgz#f6d0b00cada622a77ae43b4933f859bf7e685fb2"
+  integrity sha512-RZ01KS0xLojLgs7B6stQvPutv/WDPavXD5byjDXq+rCgYM5G8SHxyNu7YzFwVxb4UMLIZS8Zfx5Hex9ZbkOhyw==
   dependencies:
     "@babel/runtime" "7.x"
     "@vant/icons" "1.2.0"
