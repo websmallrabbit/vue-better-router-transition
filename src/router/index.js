@@ -28,6 +28,9 @@ export default new Router({
         meta: {
           title: 'tab'
         }
+      }, {
+        path: '/suspension',
+        component: r => require(['@/pages/suspension/index'], r)
       }]
     },
     {
