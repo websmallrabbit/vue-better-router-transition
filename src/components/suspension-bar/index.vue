@@ -45,7 +45,8 @@ export default {
       windowHeight: ''
     }
   },
-  watch: {},
+  watch: {
+  },
   computed: {},
   methods: {
     // 实现移动端拖拽
@@ -69,9 +70,6 @@ export default {
       this.windowHeight = document.documentElement.clientHeight
       this.dx = this.moveDiv.offsetLeft // 移动的div元素的位置
       this.dy = this.moveDiv.offsetTop
-
-      // console.log("moveDiv.offsetLeft", moveDiv.offsetLeft)
-      // console.log("touch.clientX", touch.clientX)
     },
     move () {
       if (this.flags) {
@@ -129,6 +127,7 @@ export default {
     },
     // 鼠标释放时候的函数，鼠标释放，移除之前添加的侦听事件，将passive设置为true，不然背景会滑动不了
     changeNumLeft (startN, endN, speed = 20) {
+      console.log(this.moveDiv.getBoundingClientRect().left, 'moveDiv')
       let aniTimer = null
       clearInterval(aniTimer)
       let next = 0
@@ -144,7 +143,6 @@ export default {
             left: this.moveDiv.getBoundingClientRect().left,
             top: this.moveDiv.getBoundingClientRect().top
           }
-          console.log(this.moveDiv, 'moveDiv')
           localStorage.setItem('suspensionBar', JSON.stringify(suspensionBar))
           BUS.$emit('changePos', true)
           this.$emit('change')
@@ -153,10 +151,10 @@ export default {
       return next
     },
     changeNumRight (startN, endN, speed = 20) {
+      console.log(startN, endN)
       let aniTimer = null
       clearInterval(aniTimer)
-      let next = 0
-      next = Math.floor(startN + speed)
+      let next = startN
       aniTimer = setInterval(() => {
         this.moveDiv.style.left = next + 'px'
         if (next >= endN) {
@@ -164,13 +162,13 @@ export default {
           this.moveDiv.style.left = this.windowWidth - this.moveDiv.clientWidth + 'px'
           this.flags = false
           const suspensionBar = {
-            left: this.moveDiv.getBoundingClientRect().left,
+            left: this.moveDiv.getBoundingClientRect().left <= '325' ? this.moveDiv.getBoundingClientRect().left : '325',
             top: this.moveDiv.getBoundingClientRect().top
           }
-          console.log(this.moveDiv, 'moveDiv')
           localStorage.setItem('suspensionBar', JSON.stringify(suspensionBar))
           BUS.$emit('changePos', true)
           this.$emit('change')
+          this.moveDiv.style.left = this.moveDiv.getBoundingClientRect().left <= '325' ? this.moveDiv.getBoundingClientRect().left + 'px' : '325px'
         }
         next += speed
       }, 16.7)
@@ -179,7 +177,7 @@ export default {
     end () {
       if (this.moveDiv.getBoundingClientRect().left + this.moveDiv.clientWidth / 2 < this.windowWidth / 2) {
         this.changeNumLeft(this.moveDiv.getBoundingClientRect().left, 0)
-      } else {
+      } else if (this.moveDiv.getBoundingClientRect().left + this.moveDiv.clientWidth / 2 > this.windowWidth / 2) {
         this.changeNumRight(this.moveDiv.getBoundingClientRect().left, this.windowWidth - this.moveDiv.clientWidth)
       }
       // 注意事项，在添加和删除监听事件时，其function必须是同名的函数，不能为匿名函数。
@@ -192,6 +190,7 @@ export default {
       document.addEventListener('mousemove', function (e) {
         window.event.returnValue = true
       })
+      // BUS.$emit('down', true)
     },
     preventDefault (e) {
       e.preventDefault()

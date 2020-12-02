@@ -1,6 +1,10 @@
 <template>
   <div ref="buttonContentRef" :class="['button-content-wrapper', {'active': buttonActive}]">
-
+    <div :class="['round-wrapper', {'round-wrapper-active': buttonActive}]" @click="handleClick">
+      <span class="round-1"></span>
+      <span class="round-2"></span>
+      <span class="round-3"></span>
+    </div>
   </div>
 </template>
 
@@ -9,26 +13,31 @@ import BUS from '@/utils/bus'
 export default {
   name: 'ButtonContent',
   props: {
-    value: {
-      type: Boolean,
-      default: false
-    }
   },
   data () {
     return {
-      buttonActive: false,
-      flag: false,
-      windowWidth: '',
-      windowHeight: ''
+      buttonActive: false
     }
   },
   mounted () {
-    this.windowWidth = document.documentElement.clientWidth
-    this.windowHeight = document.documentElement.clientHeight
     if (this.$refs.buttonContentRef) {
       this.$refs.buttonContentRef.style.left = JSON.parse(localStorage.getItem('suspensionBar')).left + 'px'
       this.$refs.buttonContentRef.style.top = JSON.parse(localStorage.getItem('suspensionBar')).top + 'px'
     }
+    BUS.$on('buttonActive', (v) => {
+      this.buttonActive = v
+      this.$refs.buttonContentRef.style.opacity = '1'
+    })
+    BUS.$on('documentActive', (v) => {
+      if (v) {
+        this.$refs.buttonContentRef.style.opacity = '1'
+      } else {
+        setTimeout(() => {
+          this.$refs.buttonContentRef.style.opacity = '0'
+        }, 300)
+        this.buttonActive = v
+      }
+    })
     BUS.$on('changePos', (v) => {
       if (this.$refs.buttonContentRef) {
         this.$refs.buttonContentRef.style.left = JSON.parse(localStorage.getItem('suspensionBar')).left + 'px'
@@ -36,21 +45,10 @@ export default {
       }
     })
   },
-  watch: {
-    value (val) {
-      this.buttonActive = val
-      if (val) {
-        // this.$refs.buttonContentRef.style.left = this.windowWidth / 2 + 'px'
-        // this.$refs.buttonContentRef.style.top = this.windowHeight / 2 + 'px'
-      } else {
-        this.$refs.buttonContentRef.style.left = JSON.parse(localStorage.getItem('suspensionBar')).left + 'px'
-        this.$refs.buttonContentRef.style.top = JSON.parse(localStorage.getItem('suspensionBar')).top + 'px'
-      }
-    },
-    buttonActive (v) {
-      this.$emit('input', v)
+  methods: {
+    handleClick () {
+      alert(1)
     }
-
   }
 }
 </script>
@@ -64,7 +62,7 @@ export default {
     text-align: center;
     line-height: 100px;
     border-radius: 12px;
-    opacity: 1;
+    opacity: 0;
     transition: all .3s;
     z-index: 998;
   }
@@ -80,7 +78,47 @@ export default {
     text-align: center;
     line-height: 100px;
     border-radius: 12px;
+    z-index: 2000;
     opacity: 1;
+    transition: all .3s;
+  }
+  .button-content-wrapper .round-1 {
+    display: block;
+    position: absolute;
+    left: 6px;
+    top: 7px;
+    width: 38px;
+    height: 38px;
+    background: #474e59;
+    border-radius: 100%;
+  }
+  .button-content-wrapper .round-2 {
+    display: block;
+    position: absolute;
+    left: 9px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    background: #555e6c;
+    border-radius: 100%;
+    border: 1px solid #72727b;
+  }
+  .button-content-wrapper .round-3 {
+    display: block;
+    position: absolute;
+    left: 13px;
+    top: 14px;
+    width: 24px;
+    height: 24px;
+    background: #cbd7e2;
+    border-radius: 100%;
+    box-sizing: border-box;
+  }
+  .button-content-wrapper .round-wrapper {
+    transition: all .3s;
+  }
+  .button-content-wrapper .round-wrapper-active {
+    transform: translate(95px, 180px);
     transition: all .3s;
   }
 </style>

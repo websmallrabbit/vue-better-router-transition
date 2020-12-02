@@ -29,8 +29,8 @@ export default new Router({
           title: 'tab'
         }
       }, {
-        path: '/suspension',
-        component: r => require(['@/pages/suspension/index'], r)
+        path: '/composite',
+        component: r => require(['@/pages/compositeImage/index'], r)
       }]
     },
     {

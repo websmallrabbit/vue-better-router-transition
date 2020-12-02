@@ -1,9 +1,12 @@
 <template>
-  <div class="suspension-bar-wrapper">
-    <suspension-bar v-show="!buttonActive" :position="position" @change="change">
-      <iphone-button :changeOpacity="changeOpacity"></iphone-button>
-    </suspension-bar>
-    <button-content v-model="buttonActive"></button-content>
+  <div class="suspension-bar-box">
+    <div ref="maskRef" class="suspension-mask"></div>
+    <div class="suspension-bar-wrapper">
+      <suspension-bar :position="position" :isClickBtn="isClickBtn" @change="change">
+        <iphone-button :changeOpacity="changeOpacity"></iphone-button>
+      </suspension-bar>
+      <button-content></button-content>
+    </div>
   </div>
 </template>
 
@@ -11,7 +14,7 @@
 import SuspensionBar from '../../components/suspension-bar/index'
 import IphoneButton from '../../components/suspension-bar/iphoneButton'
 import ButtonContent from '../../components/suspension-bar/buttonContent'
-
+import BUS from '@/utils/bus'
 export default {
   name: 'Suspension',
   data () {
@@ -23,7 +26,8 @@ export default {
       endTime: 1,
       timer: null,
       changeOpacity: false,
-      buttonActive: false
+      isClickBtn: false,
+      isShowContent: false
     }
   },
   components: {ButtonContent, IphoneButton, SuspensionBar},
@@ -39,6 +43,11 @@ export default {
     }
     this.change()
     this.listenClick()
+    BUS.$on('buttonActive', (v) => {
+      if (v) {
+        this.$refs.maskRef.style.zIndex = 1001
+      }
+    })
   },
   methods: {
     change () {
@@ -56,10 +65,12 @@ export default {
     listenClick () {
       document.addEventListener('click', (e) => {
         console.log(e.target.className, 'e.target.className')
-        if (e.target.className.indexOf('suspension-bar-wrapper') !== -1) {
-          this.buttonActive = false
+        if (e.target.className.indexOf('mask') !== -1) {
+          BUS.$emit('documentActive', false)
+          this.$refs.maskRef.style.zIndex = 0
         } else if (e.target.className.indexOf('round-1') !== -1 || e.target.className.indexOf('round-2') !== -1 || e.target.className.indexOf('round-3') !== -1 || e.target.className.indexOf('iphone-button-wrapper') !== -1) {
-          this.buttonActive = true
+          this.$refs.maskRef.style.zIndex = 1001
+          BUS.$emit('documentActive', true)
         }
       })
     }
@@ -68,12 +79,25 @@ export default {
 </script>
 
 <style scoped>
+  .suspension-bar-box {
+  }
+  .suspension-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 0;
+  }
   .suspension-bar-wrapper {
+    position: absolute;
     width: 100%;
     height: 100%;
     /*background: url("../../assets/yuan.jpeg") no-repeat;*/
     /*background: url("../../assets/WechatIMG552.jpeg") no-repeat;*/
     background-size: cover;
+    overflow: hidden;
   }
   .iphone-button-wrapper {
     width: 50px;

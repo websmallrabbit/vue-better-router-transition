@@ -10,3 +10,20 @@
     </van-cell-group>
   </router-layout>
 </template>
+
+<script>
+import {testTimeOut} from '../api'
+
+export default {
+  name: 'Home',
+  created () {
+    this.getTimeOut()
+  },
+  methods: {
+    async getTimeOut () {
+      const result = await testTimeOut()
+      console.log(result, 'result')
+    }
+  }
+}
+</script>

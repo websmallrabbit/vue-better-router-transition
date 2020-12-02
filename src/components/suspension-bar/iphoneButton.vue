@@ -1,5 +1,5 @@
 <template>
-  <div ref="buttonContentRef" :class="['iphone-button-wrapper', {'opacity-active': !!status}]">
+  <div ref="buttonContentRef" v-if="isShowBtn" :class="['iphone-button-wrapper', {'opacity-active': !!status}]" @click.stop.prevent="handleClick">
     <div>
       <span class="round-1"></span>
       <span class="round-2"></span>
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import BUS from '@/utils/bus'
 export default {
   name: 'iphoneButton',
   props: {
@@ -21,7 +22,9 @@ export default {
     return {
       status: false,
       opacity: '',
-      flag: false
+      flag: false,
+      isShowBtn: true,
+      buttonActive: true
     }
   },
   watch: {
@@ -31,13 +34,30 @@ export default {
   },
   created () {
     this.status = this.changeOpacity
+    BUS.$on('documentActive', (v) => {
+      if (!v) {
+        setTimeout(() => {
+          this.isShowBtn = !v
+        }, 300)
+      }
+    })
+  },
+  methods: {
+    handleClick () {
+      BUS.$emit('buttonActive', this.buttonActive)
+      this.isShowBtn = false
+    }
   }
 }
 </script>
 
 <style scoped>
   .opacity-active {
+    transition: all .3s;
     opacity: 0.5;
+  }
+  .iphone-button-wrapper {
+    transition: all .3s;
   }
   .iphone-button-wrapper .round-1 {
     display: block;

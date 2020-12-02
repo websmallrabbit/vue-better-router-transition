@@ -1,11 +1,15 @@
 <template>
-    <vue-better-router-transition :keepAlive="true"></vue-better-router-transition>
+    <div>
+      <suspension />
+      <vue-better-router-transition :keepAlive="true"></vue-better-router-transition>
+    </div>
 </template>
 
 <script>
-
+import suspension from './pages/suspension/index'
 export default {
-  name: 'App'
+  name: 'App',
+  components: { suspension }
 }
 </script>
 
