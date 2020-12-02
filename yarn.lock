@@ -126,6 +126,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@popperjs/core@^2.5.4":
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.5.4.tgz#de25b5da9f727985a3757fd59b5d028aba75841a"
+  integrity sha512-ZpKr+WTb8zsajqgDkvCEWgp6d5eJT6Q63Ng2neTbzBO76Lbe91vX/iVIW9dikq+Fs3yEo+ls4cxeXABD2LtcbQ==
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.npm.taobao.org/@types/q/download/@types/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
@@ -141,10 +146,17 @@
   resolved "https://registry.npm.taobao.org/@types/strip-json-comments/download/@types/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
   integrity sha1-mqMMBNshKpoGSdaub9UKzMQHSKE=
 
-"@vant/icons@1.1.15":
-  version "1.1.15"
-  resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-1.1.15.tgz#53c51ace21e9992bfeeb2e1ad9094fbf6506d116"
-  integrity sha512-96tbJotfofrKpOrUGWKkiGLJsCFc0OX5pikWLW5yarD+EMhi0zCrQSDb95xGrp/HETAFm+nSTQu2e1zGsWN/7A==
+"@vant/icons@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-1.4.0.tgz#a91f7894f2f34356f78a5d6f8b9d4f1a46add0c5"
+  integrity sha512-96k+x00FqdGAQeTWrHEJ6C+QNifPQu58W9mv8pJAQ7VQ527KV9GHQT7m2TT+PhHXejDENYhlpW/XWOB66j8r8w==
+
+"@vant/popperjs@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@vant/popperjs/-/popperjs-1.0.0.tgz#2d66ab4b8e275c98fb82f5efd43fdd47964d11f2"
+  integrity sha512-2OAl3URmH37OOATcKuT8iuZozoZVNMc8iLLZvurWZqHlWlAojsDHm7lQ2OKlAV4jlxbiFJt0en6DY+WlxHvN9w==
+  dependencies:
+    "@popperjs/core" "^2.5.4"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -8813,12 +8825,13 @@ validate-npm-package-license@^3.0.1:
     spdx-expression-parse "^3.0.0"
 
 vant@latest:
-  version "2.2.14"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-2.2.14.tgz#882f1d46626bc04b89bc1e1bda7171f24f0d84b7"
-  integrity sha512-IpYs2FsQ8ZY6EcesOD0SBl24mpnzJW/aDVGfjDoGI5fgLQJcYp24twCeLbiX9KdZ0lAgS4PKwKQjkFX/i0yHnQ==
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-2.11.1.tgz#e71e121c951770ce412d172aa8df362bef1fb9bc"
+  integrity sha512-w98McSiJLQUiud8HV0k1SokJhF9s2lmqIwVm2IH64/HBEhCLaFgRYxDe5oeRIWNSP06K3NK95NTp7aUaWs/X2w==
   dependencies:
     "@babel/runtime" "7.x"
-    "@vant/icons" "1.1.15"
+    "@vant/icons" "1.4.0"
+    "@vant/popperjs" "^1.0.0"
     "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
     vue-lazyload "1.2.3"
 
