@@ -42,7 +42,12 @@ export default {
       yPum: '',
       moveDiv: '',
       windowWidth: '',
-      windowHeight: ''
+      windowHeight: '',
+      startY: 0, // 初始位置
+      lastY: 0, // 上一次位置
+      lastMoveTime: 0, // 用于缓动的变量
+      lastMoveStart: 0, // 用于缓动的变量
+      stopInertiaMove: false // 是否停止缓动
     }
   },
   watch: {
@@ -70,6 +75,13 @@ export default {
       this.windowHeight = document.documentElement.clientHeight
       this.dx = this.moveDiv.offsetLeft // 移动的div元素的位置
       this.dy = this.moveDiv.offsetTop
+      /**
+       * 缓动代码
+       */
+      this.lastY = this.startY = event.touches[0].pageY
+      this.lastMoveStart = this.lastY
+      this.lastMoveTime = event.timeStamp || Date.now()
+      this.stopInertiaMove = true
     },
     move () {
       if (this.flags) {
@@ -84,10 +96,6 @@ export default {
 
         this.xPum = this.dx + this.nx // 移动后，div元素的位置
         this.yPum = this.dy + this.ny
-
-        // console.log("window.clientWidth", windowWidth)
-        // console.log(this.xPum)
-        // console.log(" moveDiv.clientWidth", moveDiv.clientWidth)
 
         if (this.xPum > 0 && (this.xPum + this.moveDiv.clientWidth < this.windowWidth)) {
           // movediv的左右边，未出界
@@ -105,29 +113,36 @@ export default {
           this.moveDiv.style.top = this.yPum + 'px'
         } else if (this.yPum <= 0) {
           // 上边缘出界
-          this.moveDiv.style.top = 0 + 'px'
+          this.moveDiv.style.top = 20 + 'px'
         } else if (this.yPum + this.moveDiv.clientHeight >= this.windowHeight) {
           // 下边缘
-          // console.log("windowHeight:", windowHeight)
-          // console.log("moveDiv.clientHeight:", moveDiv.clientHeight)
-          // console.log(this.yPum + moveDiv.clientHeight)
-          this.moveDiv.style.top = this.windowHeight - this.moveDiv.clientHeight + 'px'
+          this.moveDiv.style.top = this.windowHeight - this.moveDiv.clientHeight - 20 + 'px'
+        }
+
+        /**
+         * 缓动代码
+         */
+        let nowY = event.touches[0].pageY
+        let moveY = nowY - this.lastY
+        let contentTop = this.moveDiv.getBoundingClientRect().top
+        console.log(contentTop, 'contentTop')
+        // 设置top值移动content
+        this.moveDiv.style.top = (parseInt(contentTop) + moveY) + 'px'
+        this.lastY = nowY
+        let nowTime = event.timeStamp || Date.now()
+        this.stopInertiaMove = true
+        if (nowTime - this.lastMoveTime > 300) {
+          this.lastMoveTime = nowTime
+          this.lastMoveStart = nowY
         }
 
         // 阻止页面的滑动默认事件，为了只让悬浮球滑动，其他部分不滑动；如果碰到滑动问题，1.2 请注意是否获取到 touchmove, 系统默认passive: true，无法使用preventDefault
-        // document.addEventListener("touchmove", function(){
-        //  event.preventDefault();
-        // }, { passive: false });
-        // document.addEventListener("mousemove", function(){
-        //   event.preventDefault();
-        // }, { passive: false });
         document.addEventListener('touchmove', this.preventDefault, { passive: false })
         document.addEventListener('mousemove', this.preventDefault, { passive: false })
       }
     },
     // 鼠标释放时候的函数，鼠标释放，移除之前添加的侦听事件，将passive设置为true，不然背景会滑动不了
     changeNumLeft (startN, endN, speed = 20) {
-      console.log(this.moveDiv.getBoundingClientRect().left, 'moveDiv')
       let aniTimer = null
       clearInterval(aniTimer)
       let next = 0
@@ -162,13 +177,13 @@ export default {
           this.moveDiv.style.left = this.windowWidth - this.moveDiv.clientWidth + 'px'
           this.flags = false
           const suspensionBar = {
-            left: this.moveDiv.getBoundingClientRect().left <= '325' ? this.moveDiv.getBoundingClientRect().left : '325',
+            left: this.moveDiv.getBoundingClientRect().left <= this.windowWidth - 50 ? this.moveDiv.getBoundingClientRect().left : this.windowWidth - 50,
             top: this.moveDiv.getBoundingClientRect().top
           }
           localStorage.setItem('suspensionBar', JSON.stringify(suspensionBar))
           BUS.$emit('changePos', true)
           this.$emit('change')
-          this.moveDiv.style.left = this.moveDiv.getBoundingClientRect().left <= '325' ? this.moveDiv.getBoundingClientRect().left + 'px' : '325px'
+          this.moveDiv.style.left = this.moveDiv.getBoundingClientRect().left <= this.windowWidth - 50 ? this.moveDiv.getBoundingClientRect().left + 'px' : this.windowWidth - 50 + 'px'
         }
         next += speed
       }, 16.7)
@@ -180,6 +195,46 @@ export default {
       } else if (this.moveDiv.getBoundingClientRect().left + this.moveDiv.clientWidth / 2 > this.windowWidth / 2) {
         this.changeNumRight(this.moveDiv.getBoundingClientRect().left, this.windowWidth - this.moveDiv.clientWidth)
       }
+
+      /**
+       * 缓动代码
+       */
+      let nowY = event.changedTouches[0].pageY
+      console.log(event.changedTouches[0].pageY, 'e.touches[0]')
+      let moveY = nowY - this.lastY
+      let contentTop = this.moveDiv.getBoundingClientRect().top
+      let contentY = (parseInt(contentTop) + moveY)
+      // 设置top值移动content
+      this.moveDiv.style.top = contentY + 'px'
+      this.lastY = nowY
+      let nowTime = event.timeStamp || Date.now()
+      let v = (nowY - this.lastMoveStart) / (nowTime - this.lastMoveTime) // 最后一段时间手指划动速度
+      this.stopInertiaMove = false;
+
+      (function (v, startTime, contentY) {
+        var dir = v > 0 ? -1 : 1 // 加速度方向
+        var deceleration = dir * 0.0006
+        var duration = v / deceleration // 速度消减至0所需时间
+
+        console.log(v, deceleration, duration, 'duration')
+        // let dist = v * duration / 2 // 最终移动多少
+        // console.log(dist, 'dist')
+        function inertiaMove () {
+          if (this.stopInertiaMove) return
+          let nowTime = event.timeStamp || Date.now()
+          let t = nowTime - startTime
+          let nowV = v + t * deceleration
+          // 速度方向变化表示速度达到0了
+          if (dir * nowV < 0) {
+            return
+          }
+          let moveY = (v + nowV) / 2 * t
+          this.moveDiv.style.top = (contentY + moveY) + 'px'
+          setTimeout(inertiaMove, 10)
+        }
+        inertiaMove()
+      })(v, nowTime, contentY)
+
       // 注意事项，在添加和删除监听事件时，其function必须是同名的函数，不能为匿名函数。
       document.removeEventListener('touchmove', this.preventDefault, false)
       document.removeEventListener('mousemove', this.preventDefault, false)

@@ -21,8 +21,8 @@ export default {
   },
   mounted () {
     if (this.$refs.buttonContentRef) {
-      this.$refs.buttonContentRef.style.left = JSON.parse(localStorage.getItem('suspensionBar')).left + 'px'
-      this.$refs.buttonContentRef.style.top = JSON.parse(localStorage.getItem('suspensionBar')).top + 'px'
+      // this.$refs.buttonContentRef.style.left = JSON.parse(localStorage.getItem('suspensionBar')).left + 'px'
+      // this.$refs.buttonContentRef.style.top = JSON.parse(localStorage.getItem('suspensionBar')).top + 'px'
     }
     BUS.$on('buttonActive', (v) => {
       this.buttonActive = v
