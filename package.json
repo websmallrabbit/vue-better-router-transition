@@ -1,6 +1,6 @@
 {
   "name": "vue-better-router-transition",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "vue-仿微信页面左右切换动画效果，页面刷新不影响,滑动切换页面",
   "private": false,
   "main": "lib/vue_route_transition.min.js",

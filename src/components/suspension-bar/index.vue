@@ -106,7 +106,6 @@ export default {
         } else if (this.xPum + this.moveDiv.clientWidth >= this.windowWidth) {
           // 右边缘出界
           this.moveDiv.style.left = (this.windowWidth - this.moveDiv.clientWidth) + 'px'
-          // console.log("dx", windowWidth - moveDiv.clientWidth)
         }
         // 上下未出界
         if (this.yPum > 0 && (this.yPum + this.moveDiv.clientHeight < this.windowHeight)) {
@@ -125,7 +124,6 @@ export default {
         let nowY = event.touches[0].pageY
         let moveY = nowY - this.lastY
         let contentTop = this.moveDiv.getBoundingClientRect().top
-        console.log(contentTop, 'contentTop')
         // 设置top值移动content
         this.moveDiv.style.top = (parseInt(contentTop) + moveY) + 'px'
         this.lastY = nowY
@@ -166,7 +164,6 @@ export default {
       return next
     },
     changeNumRight (startN, endN, speed = 20) {
-      console.log(startN, endN)
       let aniTimer = null
       clearInterval(aniTimer)
       let next = startN
@@ -200,7 +197,6 @@ export default {
        * 缓动代码
        */
       let nowY = event.changedTouches[0].pageY
-      console.log(event.changedTouches[0].pageY, 'e.touches[0]')
       let moveY = nowY - this.lastY
       let contentTop = this.moveDiv.getBoundingClientRect().top
       let contentY = (parseInt(contentTop) + moveY)
@@ -214,11 +210,8 @@ export default {
       (function (v, startTime, contentY) {
         var dir = v > 0 ? -1 : 1 // 加速度方向
         var deceleration = dir * 0.0006
-        var duration = v / deceleration // 速度消减至0所需时间
-
-        console.log(v, deceleration, duration, 'duration')
+        // var duration = v / deceleration // 速度消减至0所需时间
         // let dist = v * duration / 2 // 最终移动多少
-        // console.log(dist, 'dist')
         function inertiaMove () {
           if (this.stopInertiaMove) return
           let nowTime = event.timeStamp || Date.now()
