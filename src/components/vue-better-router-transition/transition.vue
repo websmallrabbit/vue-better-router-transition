@@ -9,6 +9,7 @@
   </div>
 </template>
 <script>
+import {noSetPageCount} from './index'
 export default {
   name: 'vue-better-router-transition',
   props: {
@@ -65,13 +66,13 @@ export default {
           this.setPageDirection({dir: 'slide-right', to, from})
         }
       } else {
-        if (to.path !== '/home') {
+        if (noSetPageCount.join('').indexOf(to.path) > -1) {
+          this.setPageDirection({ dir: 'slide-right', to, from })
+        } else {
           ++historyCount
           history.setItem('count', historyCount)
           history.setItem(to.path, historyCount)
-          this.setPageDirection({dir: 'slide-left', to, from})
-        } else {
-          this.setPageDirection({dir: 'slide-right', to, from})
+          this.setPageDirection({ dir: 'slide-left', to, from })
         }
       }
       if (/\/http/.test(to.path)) {

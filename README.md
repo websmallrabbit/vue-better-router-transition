@@ -14,8 +14,9 @@ vue-仿微信页面左右切换动画效果，页面刷新不影响,滑动切换
 ## 快速使用
 1. npm i vue-better-router-transition
 2. main.js  
-  import VueBetterRouterTransition from 'vue-better-router-transition'
-  Vue.use(VueBetterRouterTransition)
+import VueBetterRouterTransition from '@/components/vue-better-router-transition'
+VueBetterRouterTransition.noSetPage(['/', 'userCenter']) // 设置初始页面，将来转换场景将从这页开始（此页面，初始不设置session）
+Vue.use(VueBetterRouterTransition)
 3. app.vue文件里
     <vue-better-router-transition :keepAlive="true"></vue-better-router-transition>   
     默认为缓存可以配置   
@@ -69,7 +70,7 @@ https://github.com/websmallrabbit/vue-better-router-transition/issues
 
 - 个人主页
 https://websmallrabbit.github.io
-###- 技术公众号： 程序员蜗牛
+###- 技术公众号： 程序员蜗牛 (关注有学习资料送)
 - 收款二维码   
 我想可以请喝杯咖啡嘛ヾ(≧O≦)〃嗷~
 <center>
