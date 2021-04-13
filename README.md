@@ -70,7 +70,7 @@ https://github.com/websmallrabbit/vue-better-router-transition/issues
 
 - 个人主页
 https://websmallrabbit.github.io
-###- 技术公众号： 程序员蜗牛 (关注有学习资料送)
+###  - 技术公众号： 程序员蜗牛 (关注有学习资料送)
 - 收款二维码   
 我想可以请喝杯咖啡嘛ヾ(≧O≦)〃嗷~
 <center>
